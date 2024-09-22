@@ -14,17 +14,17 @@
 / {
 	compatible = "raspberrypi,4-model-b", "brcm,bcm2711";
 	model = "Raspberry Pi 4 Model B";
-
+	
 	chosen {
 		/* 8250 auxiliary UART instead of pl011 */
 		stdout-path = "serial1:115200n8";
 	};
-
+	
 	leds {
 		led-act {
 			gpios = <&gpio 42 GPIO_ACTIVE_HIGH>;
 		};
-
+		
 		led-pwr {
 			label = "PWR";
 			gpios = <&expgpio 2 GPIO_ACTIVE_LOW>;
@@ -32,7 +32,7 @@
 			linux,default-trigger = "default-on";
 		};
 	};
-
+	
 	sd_io_1v8_reg: sd_io_1v8_reg {
 		compatible = "regulator-gpio";
 		regulator-name = "vdd-sd-io";
@@ -43,10 +43,10 @@
 		regulator-settling-time-us = <5000>;
 		gpios = <&expgpio 4 GPIO_ACTIVE_HIGH>;
 		states = <1800000 0x1>,
-			 <3300000 0x0>;
+		<3300000 0x0>;
 		status = "okay";
 	};
-
+	
 	sd_vcc_reg: sd_vcc_reg {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc-sd";
@@ -72,86 +72,86 @@
 
 &expgpio {
 	gpio-line-names = "BT_ON",		/*  0 */
-			  "WL_ON",
-			  "PWR_LED_OFF",
-			  "GLOBAL_RESET",
-			  "VDD_SD_IO_SEL",
-			  "CAM_GPIO",		/*  5 */
-			  "SD_PWR_ON",
-			  "SD_OC_N";
+	"WL_ON",
+	"PWR_LED_OFF",
+	"GLOBAL_RESET",
+	"VDD_SD_IO_SEL",
+	"CAM_GPIO",		/*  5 */
+	"SD_PWR_ON",
+	"SD_OC_N";
 };
 
 &gpio {
 	/*
-	 * Parts taken from rpi_SCH_4b_4p0_reduced.pdf and
-	 * the official GPU firmware DT blob.
-	 *
-	 * Legend:
-	 * "FOO" = GPIO line named "FOO" on the schematic
-	 * "FOO_N" = GPIO line named "FOO" on schematic, active low
-	 */
+	* Parts taken from rpi_SCH_4b_4p0_reduced.pdf and
+	* the official GPU firmware DT blob.
+	*
+	* Legend:
+	* "FOO" = GPIO line named "FOO" on the schematic
+	* "FOO_N" = GPIO line named "FOO" on schematic, active low
+	*/
 	gpio-line-names = "ID_SDA",		/*  0 */
-			  "ID_SCL",
-			  "SDA1",
-			  "SCL1",
-			  "GPIO_GCLK",
-			  "GPIO5",		/*  5 */
-			  "GPIO6",
-			  "SPI_CE1_N",
-			  "SPI_CE0_N",
-			  "SPI_MISO",
-			  "SPI_MOSI",		/* 10 */
-			  "SPI_SCLK",
-			  "GPIO12",
-			  "GPIO13",
-			  /* Serial port */
-			  "TXD1",
-			  "RXD1",		/* 15 */
-			  "GPIO16",
-			  "GPIO17",
-			  "GPIO18",
-			  "GPIO19",
-			  "GPIO20",		/* 20 */
-			  "GPIO21",
-			  "GPIO22",
-			  "GPIO23",
-			  "GPIO24",
-			  "GPIO25",		/* 25 */
-			  "GPIO26",
-			  "GPIO27",
-			  "RGMII_MDIO",
-			  "RGMIO_MDC",
-			  /* Used by BT module */
-			  "CTS0",		/* 30 */
-			  "RTS0",
-			  "TXD0",
-			  "RXD0",
-			  /* Used by Wifi */
-			  "SD1_CLK",
-			  "SD1_CMD",		/* 35 */
-			  "SD1_DATA0",
-			  "SD1_DATA1",
-			  "SD1_DATA2",
-			  "SD1_DATA3",
-			  /* Shared with SPI flash */
-			  "PWM0_MISO",		/* 40 */
-			  "PWM1_MOSI",
-			  "STATUS_LED_G_CLK",
-			  "SPIFLASH_CE_N",
-			  "SDA0",
-			  "SCL0",		/* 45 */
-			  "RGMII_RXCLK",
-			  "RGMII_RXCTL",
-			  "RGMII_RXD0",
-			  "RGMII_RXD1",
-			  "RGMII_RXD2",		/* 50 */
-			  "RGMII_RXD3",
-			  "RGMII_TXCLK",
-			  "RGMII_TXCTL",
-			  "RGMII_TXD0",
-			  "RGMII_TXD1",		/* 55 */
-			  "RGMII_TXD2",
-			  "RGMII_TXD3";
+	"ID_SCL",
+	"SDA1",
+	"SCL1",
+	"GPIO_GCLK",
+	"GPIO5",		/*  5 */
+	"GPIO6",
+	"SPI_CE1_N",
+	"SPI_CE0_N",
+	"SPI_MISO",
+	"SPI_MOSI",		/* 10 */
+	"SPI_SCLK",
+	"GPIO12",
+	"GPIO13",
+	/* Serial port */
+	"TXD1",
+	"RXD1",		/* 15 */
+	"GPIO16",
+	"GPIO17",
+	"GPIO18",
+	"GPIO19",
+	"GPIO20",		/* 20 */
+	"GPIO21",
+	"GPIO22",
+	"GPIO23",
+	"GPIO24",
+	"GPIO25",		/* 25 */
+	"GPIO26",
+	"GPIO27",
+	"RGMII_MDIO",
+	"RGMIO_MDC",
+	/* Used by BT module */
+	"CTS0",		/* 30 */
+	"RTS0",
+	"TXD0",
+	"RXD0",
+	/* Used by Wifi */
+	"SD1_CLK",
+	"SD1_CMD",		/* 35 */
+	"SD1_DATA0",
+	"SD1_DATA1",
+	"SD1_DATA2",
+	"SD1_DATA3",
+	/* Shared with SPI flash */
+	"PWM0_MISO",		/* 40 */
+	"PWM1_MOSI",
+	"STATUS_LED_G_CLK",
+	"SPIFLASH_CE_N",
+	"SDA0",
+	"SCL0",		/* 45 */
+	"RGMII_RXCLK",
+	"RGMII_RXCTL",
+	"RGMII_RXD0",
+	"RGMII_RXD1",
+	"RGMII_RXD2",		/* 50 */
+	"RGMII_RXD3",
+	"RGMII_TXCLK",
+	"RGMII_TXCTL",
+	"RGMII_TXD0",
+	"RGMII_TXD1",		/* 55 */
+	"RGMII_TXD2",
+	"RGMII_TXD3";
 };
 
 &gpio {
@@ -159,7 +159,7 @@
 		compatible = "gpio-leds";
 		led@0 {
 			label = "my_cool_led";
-			gpios = <&gpio 22 1>; 
+			gpios = <&gpio 22 1>;
 			linux,default-trigger = "default-on";
 			default-state = "on";
 		};
@@ -223,9 +223,9 @@
 		#address-cells = <3>;
 		#size-cells = <2>;
 		ranges;
-
+		
 		reg = <0 0 0 0 0>;
-
+		
 		usb@0,0 {
 			reg = <0 0 0 0 0>;
 			resets = <&reset RASPBERRYPI_FIRMWARE_RESET_ID_USB>;
@@ -279,7 +279,7 @@
 	chosen {
 		bootargs = "coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_headphones=0";
 	};
-
+	
 	/delete-node/ wifi-pwrseq;
 };
 
@@ -303,7 +303,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&spi0_pins &spi0_cs_pins>;
 	cs-gpios = <&gpio 8 1>, <&gpio 7 1>;
-
+	
 	spidev0: spidev@0{
 		compatible = "spidev";
 		reg = <0>;	/* CE0 */
@@ -311,7 +311,7 @@
 		#size-cells = <0>;
 		spi-max-frequency = <125000000>;
 	};
-
+	
 	spidev1: spidev@1{
 		compatible = "spidev";
 		reg = <1>;	/* CE1 */
@@ -323,24 +323,24 @@
 
 &gpio {
 	bt_pins: bt_pins {
-		brcm,pins = "-"; // non-empty to keep btuart happy, //4 = 0
-				 // to fool pinctrl
+		brcm,pins = "-";// non-empty to keep btuart happy, //4 = 0
+		// to fool pinctrl
 		brcm,function = <0>;
 		brcm,pull = <2>;
 	};
-
+	
 	uart0_pins: uart0_pins {
 		brcm,pins = <32 33>;
 		brcm,function = <BCM2835_FSEL_ALT3>;
 		brcm,pull = <0 2>;
 	};
-
+	
 	uart1_pins: uart1_pins {
 		brcm,pins;
 		brcm,function;
 		brcm,pull;
 	};
-
+	
 	uart1_bt_pins: uart1_bt_pins {
 		brcm,pins = <32 33 30 31>;
 		brcm,function = <BCM2835_FSEL_ALT5>; /* alt5=UART1 */
@@ -388,7 +388,7 @@
 		linux,default-trigger = "mmc0";
 		gpios = <&gpio 42 GPIO_ACTIVE_HIGH>;
 	};
-
+	
 	pwr_led: led-pwr {
 		default-state = "off";
 		linux,default-trigger = "default-on";
@@ -414,16 +414,16 @@ cam0_reg: &cam_dummy_reg {
 
 / {
 	__overrides__ {
-		audio = <&chosen>,"bootargs{on='snd_bcm2835.enable_headphones=1 snd_bcm2835.enable_hdmi=1',off='snd_bcm2835.enable_headphones=0 snd_bcm2835.enable_hdmi=0'}";
-
+	audio = <&chosen>,"bootargs{on='snd_bcm2835.enable_headphones=1 snd_bcm2835.enable_hdmi=1',off='snd_bcm2835.enable_headphones=0 snd_bcm2835.enable_hdmi=0'}";
+		
 		act_led_gpio = <&act_led>,"gpios:4";
 		act_led_activelow = <&act_led>,"gpios:8";
 		act_led_trigger = <&act_led>,"linux,default-trigger";
-
+		
 		pwr_led_gpio = <&pwr_led>,"gpios:4";
 		pwr_led_activelow = <&pwr_led>,"gpios:8";
 		pwr_led_trigger = <&pwr_led>,"linux,default-trigger";
-
+		
 		eth_led0 = <&phy1>,"led-modes:0";
 		eth_led1 = <&phy1>,"led-modes:4";
 	};
